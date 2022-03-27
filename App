@@ -1,0 +1,41 @@
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		Stream.generate(new Supplier<Integer>() {
+
+			int i = 0;
+
+			@Override
+			public Integer get() {
+				return i++;
+			}
+
+		}).limit(5).filter(new Predicate<Integer>() {
+
+			@Override
+			public boolean test(Integer n) {
+				if (n >= 0) {
+					return true;
+				}
+				return false;
+			}
+
+		}).forEach(new Consumer<Integer>() {
+
+			@Override
+			public void accept(Integer n) {
+				System.out.println(n);
+
+			}
+
+		});
+
+	}
+
+}
